@@ -1,7 +1,10 @@
 from random import choice
+import json
 
 with open("wordle-words.txt",'r') as readObj:
-        words = readObj.read().split("\n")
+    words = readObj.read().split("\n")
+with open("word_freq.json") as readObj:
+    word_freq = json.load(readObj)
 
 class WordleHelper:
     def __init__(self):
@@ -61,15 +64,23 @@ class WordleHelper:
             print(self.num_options, "words possible")
 
     def give_guess_word(self):
-        print("Good Guess: ",choice(self.possible_words))
+        self.possible_words.sort(key=get_word_freq, reverse=True)
+        print("Good Guess: ",self.possible_words[0])
+
+    def give_top_5_guess_words(self):
+        self.possible_words.sort(key=get_word_freq, reverse=True)
+        print("Good Guess: ",self.possible_words[0:5])
 
     def print_words(self):
         for word in self.possible_words:
             print(word)
 
+def get_word_freq(word):
+    return word_freq[word]
 
 def workspace():
     wordleGame = WordleHelper()
+    wordleGame.give_top_5_guess_words()
     
 
 if __name__ == "__main__":
