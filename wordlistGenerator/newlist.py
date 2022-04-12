@@ -24,7 +24,10 @@ def create_len5_wordlist(in_path = "words.txt", out_path = "wordle-words.txt"):
 def create_freq_file(words, json_out_path = 'word_freq.json'):
     word_freq_dict = {}
     for word in words:
-        word_freq_dict[word] = get_word_frequency(word)
+        try:
+            word_freq_dict[word] = get_word_frequency(word)
+        except:
+            word_freq_dict[word] = 0
 
     with open(json_out_path, 'w', encoding='utf-8') as f:
         json.dump(word_freq_dict, f, ensure_ascii=False, indent=4)

@@ -38,12 +38,17 @@ class WordleHelper:
                 new_word_list.append(word)
         self.modify_possible_words(new_word_list)
     
-    def letter_exists_but_not_at_index(self, char, index):
+    def letter_exists_but_not_at_indexs(self, char, indexs):
+        for index in indexs:
+            self.letter_exists_but_not_at_index(char, index, False)
+        print(self.num_options, "words possible")
+        
+    def letter_exists_but_not_at_index(self, char, index, print_change = True):
         new_word_list = []
         for word in self.possible_words:
             if char.lower() in word.lower() and char.lower() not in word[index].lower():
                 new_word_list.append(word)
-        self.modify_possible_words(new_word_list)
+        self.modify_possible_words(new_word_list, print_change)
     
     def letter_exists(self,char, print_change = True):
         new_word_list = []
@@ -80,6 +85,7 @@ def get_word_freq(word):
 
 def workspace():
     wordleGame = WordleHelper()
+    wordleGame.remove_letters('rtiopc')
     wordleGame.give_top_5_guess_words()
     
 
