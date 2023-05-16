@@ -85,7 +85,12 @@ def get_word_freq(word):
 
 def workspace():
     wordleGame = WordleHelper()
-    wordleGame.remove_letters('rtiopc')
+    wordleGame.remove_letters("udiwm")
+    wordleGame.letter_exists_but_not_at_index("a",0)
+    wordleGame.letter_exists_but_not_at_index("a",4)
+    wordleGame.letter_exists_but_not_at_index("o",4)
+    wordleGame.letter_exists_but_not_at_index("o",1)
+    wordleGame.letter_exists_but_not_at_index("n",4)
     wordleGame.give_top_5_guess_words()
     
 
